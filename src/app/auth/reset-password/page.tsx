@@ -15,6 +15,8 @@ export default function ResetPasswordPage() {
   const supabaseRef = useRef<ReturnType<typeof createSupabaseBrowserClient> | null>(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -139,11 +141,14 @@ export default function ResetPasswordPage() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = "https://getcertforge.app";
+                window.location.href = "certforge://login";
+                setTimeout(() => {
+                  window.location.href = "https://getcertforge.app";
+                }, 2000);
               }}
               className="w-full rounded-md bg-cyan-400 px-4 py-2 font-medium text-slate-950 transition hover:bg-cyan-300"
             >
-              Continue
+              Open App
             </button>
           </div>
         ) : (
@@ -154,30 +159,52 @@ export default function ResetPasswordPage() {
               <label htmlFor="password" className="block text-sm text-slate-300">
                 New password
               </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                className="w-full rounded-md border border-white/15 bg-black/30 px-3 py-2 outline-none ring-cyan-300 placeholder:text-slate-500 focus:ring-2"
-                placeholder="Enter new password"
-                disabled={loading || initializing}
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  className="w-full rounded-md border border-white/15 bg-black/30 px-3 py-2 pr-10 outline-none ring-cyan-300 placeholder:text-slate-500 focus:ring-2"
+                  placeholder="Enter new password"
+                  disabled={loading || initializing}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((current) => !current)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-slate-300 transition hover:text-white"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  disabled={loading || initializing}
+                >
+                  {showPassword ? "🙈" : "👁"}
+                </button>
+              </div>
             </div>
 
             <div className="space-y-2">
               <label htmlFor="confirmPassword" className="block text-sm text-slate-300">
                 Confirm password
               </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}
-                className="w-full rounded-md border border-white/15 bg-black/30 px-3 py-2 outline-none ring-cyan-300 placeholder:text-slate-500 focus:ring-2"
-                placeholder="Confirm new password"
-                disabled={loading || initializing}
-              />
+              <div className="relative">
+                <input
+                  id="confirmPassword"
+                  type={showConfirm ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                  className="w-full rounded-md border border-white/15 bg-black/30 px-3 py-2 pr-10 outline-none ring-cyan-300 placeholder:text-slate-500 focus:ring-2"
+                  placeholder="Confirm new password"
+                  disabled={loading || initializing}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirm((current) => !current)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-slate-300 transition hover:text-white"
+                  aria-label={showConfirm ? "Hide confirm password" : "Show confirm password"}
+                  disabled={loading || initializing}
+                >
+                  {showConfirm ? "🙈" : "👁"}
+                </button>
+              </div>
             </div>
 
             {error ? <p className="text-sm text-red-300">{error}</p> : null}
