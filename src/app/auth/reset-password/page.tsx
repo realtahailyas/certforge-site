@@ -3,6 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase";
 
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+
+  return "Something went wrong";
+}
+
 export default function ResetPasswordPage() {
   const supabaseRef = useRef<ReturnType<typeof createSupabaseBrowserClient> | null>(null);
   const [password, setPassword] = useState("");
@@ -16,12 +24,6 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     const initializeSession = async () => {
       try {
-        const url = window.location.href;
-        if (!url) {
-          setError("Invalid or expired link");
-          return;
-        }
-
         const query = new URLSearchParams(window.location.search);
         const fragment = new URLSearchParams(window.location.hash.slice(1));
 
@@ -89,18 +91,44 @@ export default function ResetPasswordPage() {
 
     setLoading(true);
 
-    const { error: updateError } = await supabase.auth.updateUser({
-      password,
-    });
+    try {
+      const { error: updateError } = await supabase.auth.updateUser({
+        password,
+      });
 
-    if (updateError) {
-      setError(updateError.message);
-    } else {
+      if (updateError) {
+        throw updateError;
+      }
+
       setSuccess(true);
+    } catch (updateError) {
+      setError(getErrorMessage(updateError));
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
+
+  if (initializing) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#0B0F14] px-6 text-slate-100">
+        <div className="flex items-center gap-2">
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-200 border-t-transparent" />
+          <p>Verifying reset link...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (!sessionReady) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#0B0F14] px-6">
+        <div className="w-full max-w-md rounded-lg border border-white/10 bg-white/5 p-6 text-center text-slate-100">
+          <h1 className="text-xl font-semibold">Reset Password</h1>
+          <p className="mt-3 text-sm text-red-300">{error || "Invalid or expired link"}</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#0B0F14] px-6">
@@ -111,11 +139,11 @@ export default function ResetPasswordPage() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = "certforge://login";
+                window.location.href = "https://getcertforge.app";
               }}
               className="w-full rounded-md bg-cyan-400 px-4 py-2 font-medium text-slate-950 transition hover:bg-cyan-300"
             >
-              Open App
+              Continue
             </button>
           </div>
         ) : (
@@ -157,13 +185,13 @@ export default function ResetPasswordPage() {
             <button
               type="button"
               onClick={handleReset}
-              disabled={loading || initializing || !sessionReady}
+              disabled={loading || !sessionReady}
               className="flex w-full items-center justify-center gap-2 rounded-md bg-cyan-400 px-4 py-2 font-medium text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {(loading || initializing) && (
+              {loading && (
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-900 border-t-transparent" />
               )}
-              {loading ? "Resetting..." : initializing ? "Verifying link..." : "Reset Password"}
+              {loading ? "Resetting..." : "Reset Password"}
             </button>
           </div>
         )}
