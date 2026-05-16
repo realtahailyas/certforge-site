@@ -13,28 +13,19 @@ const ACCOUNT_DELETION_URL =
 
 // -- Logo -----------------------------------------------------------------
 
-function Logo({ size = 28 }: { size?: number }) {
+function Logo({ height = 28 }: { height?: number }) {
+  // SVG aspect ratio is 771.71 / 146.25 ≈ 5.276
+  const width = Math.round(height * 5.276);
   return (
-    <span className="inline-flex items-center gap-2.5">
-      <span
-        aria-hidden="true"
-        className="inline-flex items-center justify-center rounded-lg font-mono font-bold"
-        style={{
-          width: size,
-          height: size,
-          background: "var(--cyan)",
-          color: "#001520",
-          boxShadow: "0 0 24px -4px var(--cyan-glow)",
-          fontSize: size * 0.5,
-          letterSpacing: "-0.05em",
-        }}
-      >
-        C
-      </span>
-      <span className="text-[18px] font-extrabold tracking-tight text-[var(--text)]">
-        CertForge
-      </span>
-    </span>
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src="/brand/wordmark.svg"
+      alt="CertForge"
+      width={width}
+      height={height}
+      style={{ height, width: "auto", display: "block" }}
+      draggable={false}
+    />
   );
 }
 
@@ -1613,7 +1604,13 @@ function Footer() {
       <div className="mx-auto w-full max-w-[1200px] px-6 py-14 lg:px-10">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Logo />
+            <Link
+              href="/"
+              className="inline-flex items-center"
+              aria-label="CertForge home"
+            >
+              <Logo height={32} />
+            </Link>
             <p className="mt-4 max-w-[280px] text-[14px] leading-[1.6] text-[var(--text-2)]">
               Adaptive AWS exam prep. Built by Optivio Media.
             </p>
