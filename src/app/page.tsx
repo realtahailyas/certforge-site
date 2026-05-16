@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Faq from "./_components/Faq";
+import PlayStoreButton from "./_components/PlayStoreButton";
 import WaitlistForm from "./_components/WaitlistForm";
+import { IS_PUBLICLY_LIVE, PLAY_STORE_URL } from "./_config/site";
 import { faqEntries } from "./_data/faq";
 
-const PLAY_STORE_URL = "#"; // TODO: replace with live Play Store URL
 const ACCOUNT_DELETION_URL =
   "https://optiviomedia.notion.site/CertForge-Account-Deletion"; // placeholder; Taha's published Notion page
 
@@ -177,7 +178,9 @@ function Hero() {
               aria-hidden="true"
               className="cf-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-[var(--green)] shadow-[0_0_8px_var(--green)]"
             />
-            CLF-C02 v3 <span className="opacity-50">{"//"}</span> Live Question Bank
+            {IS_PUBLICLY_LIVE
+              ? "Now on Google Play · 100% free to start"
+              : "Launching soon on Google Play · CLF-C02"}
           </div>
 
           <h1
@@ -214,13 +217,7 @@ function Hero() {
             className="cf-fade-up mt-8 flex flex-wrap items-center gap-3"
             style={{ animationDelay: "0.25s" }}
           >
-            <a
-              href="#cta"
-              className="cf-btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[14px] font-semibold"
-            >
-              Get Early Access
-              <span aria-hidden="true">→</span>
-            </a>
+            <PlayStoreButton variant="primary" size="large" />
             <a
               href="#features"
               className="cf-btn-secondary inline-flex items-center rounded-xl px-5 py-3 text-[14px] font-semibold"
@@ -228,6 +225,28 @@ function Hero() {
               See how it works
             </a>
           </div>
+
+          <p
+            className="cf-fade-up mt-4 font-mono text-[12px] text-[var(--text-3)]"
+            style={{ animationDelay: "0.3s" }}
+          >
+            Free download · No signup required to start · Android 8.0+
+          </p>
+
+          {!IS_PUBLICLY_LIVE ? (
+            <p
+              className="cf-fade-up mt-2 font-mono text-[12px] text-[var(--text-3)]"
+              style={{ animationDelay: "0.32s" }}
+            >
+              Not on Play Store yet?{" "}
+              <a
+                href="#waitlist"
+                className="text-[var(--cyan)] underline underline-offset-2 hover:text-[var(--text)]"
+              >
+                Get launch notice →
+              </a>
+            </p>
+          ) : null}
 
           <ul
             className="cf-fade-up mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[12px] text-[var(--text-3)]"
@@ -237,19 +256,19 @@ function Hero() {
               <span aria-hidden="true" className="text-[var(--cyan)]">
                 ●
               </span>
-              800+ practice questions
+              800+ CLF-C02 questions
             </li>
             <li className="flex items-center gap-2">
               <span aria-hidden="true" className="text-[var(--cyan)]">
                 ●
               </span>
-              4 exam domains
+              Free to download
             </li>
             <li className="flex items-center gap-2">
               <span aria-hidden="true" className="text-[var(--cyan)]">
                 ●
               </span>
-              $4.99 lifetime
+              $4.99 unlock everything
             </li>
           </ul>
         </div>
@@ -839,6 +858,298 @@ function SampleQuestionSection() {
   );
 }
 
+// -- Screenshots -----------------------------------------------------------
+
+type ScreenKind = "home" | "question" | "weakness";
+
+function PhoneFrame({
+  kind,
+  caption,
+}: {
+  kind: ScreenKind;
+  caption: string;
+}) {
+  return (
+    <figure className="flex flex-col items-center">
+      <div
+        className="relative"
+        style={{
+          width: "100%",
+          maxWidth: 280,
+          aspectRatio: "9 / 16",
+          borderRadius: 32,
+          border: "12px solid var(--border-hi)",
+          background: "var(--bg-elev)",
+          boxShadow:
+            "0 30px 80px -20px rgba(0,0,0,0.7), 0 0 80px rgba(0,212,255,0.10)",
+          overflow: "hidden",
+        }}
+      >
+        <span
+          aria-hidden="true"
+          className="absolute left-1/2 top-1.5 -translate-x-1/2 rounded-full"
+          style={{
+            width: 70,
+            height: 18,
+            background: "#000",
+            border: "1px solid var(--border-hi)",
+            zIndex: 2,
+          }}
+        />
+        <div className="relative h-full w-full">
+          {kind === "home" ? <ScreenHome /> : null}
+          {kind === "question" ? <ScreenQuestion /> : null}
+          {kind === "weakness" ? <ScreenWeakness /> : null}
+        </div>
+      </div>
+      <figcaption className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-3)]">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
+function ScreenHome() {
+  return (
+    <div
+      className="flex h-full w-full flex-col gap-3 px-3.5 pt-7"
+      style={{ background: "var(--bg)" }}
+    >
+      <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em] text-[var(--text-3)]">
+        <span>9:41</span>
+        <span>● ● ●</span>
+      </div>
+      <div className="font-mono text-[8px] uppercase tracking-[0.14em] text-[var(--text-3)]">
+        {"// Readiness"}
+      </div>
+      <div className="flex items-end gap-2">
+        <span
+          className="font-mono font-bold text-[var(--cyan)]"
+          style={{ fontSize: 36, lineHeight: 1, letterSpacing: "-0.04em" }}
+        >
+          78%
+        </span>
+        <span className="mb-1 rounded-full bg-[rgba(0,255,149,0.12)] px-1.5 py-0.5 font-mono text-[7px] uppercase tracking-[0.14em] text-[var(--green)]">
+          Pass
+        </span>
+      </div>
+      <div className="space-y-2">
+        {[
+          { l: "Cloud Concepts", p: 86 },
+          { l: "Security", p: 71 },
+          { l: "Tech & Services", p: 82 },
+          { l: "Billing", p: 64 },
+        ].map((d) => (
+          <div key={d.l}>
+            <div className="flex items-center justify-between font-mono text-[8px] text-[var(--text-2)]">
+              <span>{d.l}</span>
+              <span className="text-[var(--cyan)]">{d.p}%</span>
+            </div>
+            <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-[var(--surface-hi)]">
+              <div
+                className="h-full rounded-full"
+                style={{
+                  width: `${d.p}%`,
+                  background:
+                    "linear-gradient(90deg, var(--cyan), rgba(0,212,255,0.5))",
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2">
+        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-[var(--text-3)]">
+          Streak · 12 days
+        </p>
+        <p className="mt-0.5 text-[9.5px] font-semibold text-[var(--text)]">
+          Continue → IAM Roles
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ScreenQuestion() {
+  const opts: Array<{
+    letter: string;
+    text: string;
+    state: "neutral" | "correct";
+  }> = [
+    { letter: "A", text: "Physical data centre security", state: "neutral" },
+    { letter: "B", text: "Hypervisor patching", state: "neutral" },
+    { letter: "C", text: "IAM users & permissions", state: "correct" },
+    { letter: "D", text: "Failed-drive replacement", state: "neutral" },
+  ];
+  return (
+    <div
+      className="flex h-full w-full flex-col gap-2.5 px-3.5 pt-7"
+      style={{ background: "var(--bg)" }}
+    >
+      <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em] text-[var(--text-3)]">
+        <span>Q 14 / 65</span>
+        <span className="text-[var(--cyan)]">● Live</span>
+      </div>
+      <p className="text-[10px] font-semibold leading-[1.3] text-[var(--text)]">
+        Which is the customer&apos;s responsibility under the AWS Shared
+        Responsibility Model?
+      </p>
+      <ul className="space-y-1.5">
+        {opts.map((o) => {
+          const correct = o.state === "correct";
+          return (
+            <li
+              key={o.letter}
+              className="flex items-center gap-1.5 rounded-md px-2 py-1.5"
+              style={{
+                border: correct
+                  ? "1px solid rgba(0,255,149,0.5)"
+                  : "1px solid var(--border-hi)",
+                background: correct
+                  ? "rgba(0,255,149,0.08)"
+                  : "var(--bg-elev)",
+              }}
+            >
+              <span
+                className="inline-flex h-4 w-4 items-center justify-center rounded font-mono text-[7px] font-bold"
+                style={{
+                  color: correct ? "var(--green)" : "var(--text-3)",
+                  border: `1px solid ${correct ? "var(--green)" : "var(--text-3)"}`,
+                }}
+              >
+                {o.letter}
+              </span>
+              <span className="text-[8.5px] text-[var(--text-2)]">
+                {o.text}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+      <div
+        className="mt-auto rounded-md px-2 py-1.5"
+        style={{
+          border: "1px solid rgba(0,212,255,0.35)",
+          background: "rgba(0,212,255,0.05)",
+        }}
+      >
+        <p className="font-mono text-[7.5px] uppercase tracking-[0.14em] text-[var(--green)]">
+          ✓ Correct
+        </p>
+        <p className="mt-0.5 text-[8px] leading-[1.4] text-[var(--text-2)]">
+          You handle security <em>in</em> the cloud — IAM, encryption, network.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ScreenWeakness() {
+  const rows: Array<{
+    label: string;
+    pct: number;
+    tone: "red" | "amber" | "green";
+  }> = [
+    { label: "IAM Policies", pct: 42, tone: "red" },
+    { label: "S3 Storage Classes", pct: 58, tone: "red" },
+    { label: "Pricing Models", pct: 67, tone: "amber" },
+    { label: "VPC Routing", pct: 74, tone: "amber" },
+    { label: "Shared Responsibility", pct: 88, tone: "green" },
+    { label: "Cloud Economics", pct: 91, tone: "green" },
+  ];
+  const tones: Record<typeof rows[number]["tone"], string> = {
+    red: "var(--red)",
+    amber: "var(--amber)",
+    green: "var(--green)",
+  };
+  return (
+    <div
+      className="flex h-full w-full flex-col gap-2 px-3.5 pt-7"
+      style={{ background: "var(--bg)" }}
+    >
+      <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em] text-[var(--text-3)]">
+        <span>Weakness map</span>
+        <span>6 concepts</span>
+      </div>
+      <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-[var(--text-3)]">
+        {"// Drill these next"}
+      </p>
+      <ul className="space-y-1.5">
+        {rows.map((r) => (
+          <li
+            key={r.label}
+            className="flex items-center justify-between rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 py-1.5"
+          >
+            <div className="flex items-center gap-1.5">
+              <span
+                aria-hidden="true"
+                className="inline-block h-1.5 w-1.5 rounded-full"
+                style={{
+                  background: tones[r.tone],
+                  boxShadow: `0 0 6px ${tones[r.tone]}`,
+                }}
+              />
+              <span className="text-[9px] text-[var(--text-2)]">{r.label}</span>
+            </div>
+            <span
+              className="font-mono text-[8.5px]"
+              style={{ color: tones[r.tone] }}
+            >
+              {r.pct}%
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-auto rounded-md border border-[rgba(0,212,255,0.3)] bg-[rgba(0,212,255,0.06)] px-2 py-1.5">
+        <p className="font-mono text-[7.5px] uppercase tracking-[0.14em] text-[var(--cyan)]">
+          Drill IAM policies
+        </p>
+        <p className="mt-0.5 text-[8px] text-[var(--text-2)]">
+          12 targeted questions queued
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ScreenshotsSection() {
+  return (
+    <section className="mx-auto w-full max-w-[1200px] px-6 py-20 lg:px-10 lg:py-28">
+      {/* TODO: Replace SVG mockups with real app screenshots once available.
+          Recommended: 3 PNG files at 1080×1920, placed in public/screens/ */}
+      <div className="max-w-[760px]">
+        <SectionEyebrow>[ Inside the App ]</SectionEyebrow>
+        <h2
+          className="mt-3 font-extrabold text-[var(--text)]"
+          style={{
+            fontSize: "clamp(28px, 4.2vw, 44px)",
+            letterSpacing: "-0.025em",
+            lineHeight: 1.1,
+          }}
+        >
+          Built for one-handed studying. Designed to be used daily.
+        </h2>
+        <p className="mt-5 text-[17px] leading-[1.65] text-[var(--text-2)]">
+          Dark mode, smooth animations, and a UI that gets out of your way.
+          Here&apos;s what 30 minutes inside CertForge actually looks like.
+        </p>
+      </div>
+
+      <div className="mt-14 grid items-start justify-items-center gap-10 sm:grid-cols-3 sm:gap-6">
+        <PhoneFrame kind="home" caption="// HOME · READINESS DASHBOARD" />
+        <PhoneFrame
+          kind="question"
+          caption="// QUESTION · INSTANT FEEDBACK"
+        />
+        <PhoneFrame
+          kind="weakness"
+          caption="// WEAKNESS · CONCEPT-LEVEL DRILL-DOWN"
+        />
+      </div>
+    </section>
+  );
+}
+
 // -- Pricing ---------------------------------------------------------------
 
 function PricingCard({
@@ -855,7 +1166,7 @@ function PricingCard({
   tag: string;
   active: React.ReactNode[];
   inactive?: string[];
-  cta: { label: string; primary?: boolean };
+  cta: { label: string; subtext?: string; primary?: boolean };
   featured?: boolean;
 }) {
   return (
@@ -927,13 +1238,24 @@ function PricingCard({
       </ul>
 
       <a
-        href="#cta"
+        href={PLAY_STORE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${cta.label}${cta.subtext ? " — " + cta.subtext : ""}`}
         className={
           (cta.primary ? "cf-btn-primary" : "cf-btn-secondary") +
-          " mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 text-[14px] font-semibold"
+          " mt-8 inline-flex flex-col items-center justify-center rounded-xl px-5 py-3 text-[14px] font-semibold"
         }
       >
-        {cta.label}
+        <span className="block leading-tight">{cta.label}</span>
+        {cta.subtext ? (
+          <span
+            className="mt-0.5 block font-mono text-[11px] font-normal opacity-70"
+            style={{ letterSpacing: "0.02em" }}
+          >
+            {cta.subtext}
+          </span>
+        ) : null}
       </a>
     </article>
   );
@@ -980,7 +1302,7 @@ function PricingSection() {
             "Exam simulator",
             "Live readiness score",
           ]}
-          cta={{ label: "Start Free" }}
+          cta={{ label: "Install Free" }}
         />
         <PricingCard
           name="Lifetime"
@@ -996,16 +1318,24 @@ function PricingSection() {
             "Concept-level weakness analytics",
             "Lifetime updates as CLF-C02 evolves",
           ]}
-          cta={{ label: "Get Lifetime Access", primary: true }}
+          cta={{
+            label: "Get the App",
+            subtext: "→ Choose Lifetime in-app",
+            primary: true,
+          }}
         />
         <PricingCard
           name="Monthly"
           price="$9.99 /mo"
           tag="Prefer to pay as you go."
           active={["Everything in Lifetime", "Cancel anytime", "For longer-term cert paths"]}
-          cta={{ label: "Choose Monthly" }}
+          cta={{ label: "Get the App", subtext: "→ Choose Monthly in-app" }}
         />
       </div>
+
+      <p className="mt-10 text-center font-mono text-[12px] text-[var(--text-3)]">
+        {"// All plans accessed through the same Android app. Choose your tier in-app after install."}
+      </p>
     </section>
   );
 }
@@ -1018,7 +1348,7 @@ function Testimonials() {
       quote:
         "The readiness score is the part that hooked me. I had no idea I was actually below 60% on Billing until the app told me. Re-took the exam simulator twice, passed CLF-C02 the next week.",
       name: "M.K.",
-      role: "Cloud Engineer, Karachi",
+      role: "Cloud Engineer",
       initials: "MK",
     },
     {
@@ -1132,7 +1462,10 @@ function FaqSection() {
 
 function FinalCta() {
   return (
-    <section id="cta" className="mx-auto w-full max-w-[1200px] px-6 pb-20 lg:px-10 lg:pb-28">
+    <section
+      id="cta"
+      className="mx-auto w-full max-w-[1200px] px-6 pb-20 lg:px-10 lg:pb-28"
+    >
       <div
         className="cf-dot-grid relative overflow-hidden rounded-[24px] border border-[var(--border-hi)] px-6 py-16 text-center sm:px-12 sm:py-20"
         style={{
@@ -1149,26 +1482,58 @@ function FinalCta() {
           }}
         />
         <div className="relative mx-auto max-w-[720px]">
+          <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-[var(--cyan)]">
+            [ Get the App ]
+          </p>
           <h2
-            className="font-extrabold text-[var(--text)]"
+            className="mt-3 font-extrabold text-[var(--text)]"
             style={{
               fontSize: "clamp(30px, 4.6vw, 46px)",
               letterSpacing: "-0.025em",
               lineHeight: 1.08,
             }}
           >
-            Ready to actually pass on your first try?
+            Stop reading. Start drilling.
           </h2>
-          <p className="mx-auto mt-5 max-w-[560px] text-[17px] leading-[1.6] text-[var(--text-2)]">
-            Drop your email to get notified the moment CertForge hits the Play
-            Store. No spam, no marketing drip — just the launch link.
+          <p className="mx-auto mt-5 max-w-[600px] text-[17px] leading-[1.6] text-[var(--text-2)]">
+            CertForge is free to install on Android. Drill 30 practice
+            questions, see your readiness score, and unlock the full bank for
+            $4.99 lifetime — all inside the app.
           </p>
-          <div className="mt-8">
-            <WaitlistForm />
+          <div className="mt-8 flex justify-center">
+            <PlayStoreButton variant="primary" size="large" />
           </div>
-          <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
-            {"// We'll email you once. That's it."}
+          <p className="mt-5 font-mono text-[12px] text-[var(--text-3)]">
+            Free · 800+ questions · No account required to start
           </p>
+
+          {!IS_PUBLICLY_LIVE ? (
+            <div
+              id="waitlist"
+              className="mx-auto mt-14 max-w-[480px] rounded-2xl border border-[var(--border)] bg-[rgba(255,255,255,0.015)] px-6 py-7"
+            >
+              <div
+                aria-hidden="true"
+                className="flex items-center gap-3 text-[var(--text-muted)]"
+              >
+                <span className="h-px flex-1 bg-[var(--border)]" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em]">
+                  Or
+                </span>
+                <span className="h-px flex-1 bg-[var(--border)]" />
+              </div>
+              <p className="mt-4 text-[13.5px] leading-[1.6] text-[var(--text-2)]">
+                Not on Play Store in your country yet? Drop your email and
+                we&apos;ll send the install link the moment it lands.
+              </p>
+              <div className="mt-4 [&_form]:gap-2 [&_input]:py-2.5 [&_input]:text-[14px] [&_button]:px-4 [&_button]:py-2.5 [&_button]:text-[13px]">
+                <WaitlistForm />
+              </div>
+              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                {"// We'll email you once. That's it."}
+              </p>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
@@ -1211,12 +1576,7 @@ function Nav() {
               </a>
             </li>
           </ul>
-          <a
-            href="#cta"
-            className="cf-btn-primary inline-flex items-center rounded-lg px-4 py-2 text-[13px] font-semibold"
-          >
-            Get Early Access
-          </a>
+          <PlayStoreButton variant="badge" />
         </div>
       </nav>
     </header>
@@ -1235,8 +1595,7 @@ function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-[280px] text-[14px] leading-[1.6] text-[var(--text-2)]">
-              Adaptive AWS exam prep. Built by Optivio Media in Karachi,
-              Pakistan.
+              Adaptive AWS exam prep. Built by Optivio Media.
             </p>
           </div>
           <div>
@@ -1258,9 +1617,13 @@ function Footer() {
                 </a>
               </li>
               <li>
-                {/* TODO: replace with live Play Store URL */}
-                <a href={PLAY_STORE_URL} className="hover:text-[var(--text)]">
-                  Download
+                <a
+                  href={PLAY_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--text)]"
+                >
+                  Download on Google Play
                 </a>
               </li>
             </ul>
@@ -1379,6 +1742,7 @@ export default function Home() {
         <FeaturesSection />
         <DomainsSection />
         <SampleQuestionSection />
+        <ScreenshotsSection />
         <PricingSection />
         <Testimonials />
         <FaqSection />

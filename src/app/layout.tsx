@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { faqEntries } from "./_data/faq";
+import { ANDROID_PACKAGE_ID, PLAY_STORE_URL } from "./_config/site";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
     siteName: "CertForge",
     title: "CertForge — AWS Cloud Practitioner (CLF-C02) Prep, Reimagined",
     description:
-      "The adaptive AWS exam prep app that finds your weak spots, drills them with targeted questions, and tells you exactly when you're ready to pass.",
+      "Free Android app to pass the AWS Cloud Practitioner (CLF-C02) on your first try. 800+ adaptive questions, exam simulator, and a live readiness score. Download free on Google Play.",
     // TODO: Taha to generate a 1200x630 OG image in Canva and place at /public/og.png
     images: [
       {
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CertForge — Adaptive AWS Cloud Practitioner Prep",
     description:
-      "Pass CLF-C02 on your first try. 800+ questions, real exam simulator, live readiness score.",
+      "Free Android app to pass the AWS Cloud Practitioner (CLF-C02) on your first try. 800+ adaptive questions, exam simulator, and a live readiness score. Download free on Google Play.",
     images: [SITE_URL + "/og.png"],
   },
 };
@@ -80,15 +81,32 @@ const softwareApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "CertForge",
-  operatingSystem: "Android",
+  operatingSystem: "Android 8.0+",
   applicationCategory: "EducationalApplication",
+  downloadUrl: PLAY_STORE_URL,
+  installUrl: PLAY_STORE_URL,
   description:
-    "Adaptive AWS Cloud Practitioner (CLF-C02) exam preparation app with 800+ practice questions, weakness detection, real exam simulator, and a live readiness score.",
+    "Adaptive AWS Cloud Practitioner (CLF-C02) exam preparation app with 800+ practice questions, weakness detection, real exam simulator, and a live readiness score. Free to download on Google Play.",
   url: SITE_URL + "/",
   offers: [
-    { "@type": "Offer", price: "0", priceCurrency: "USD", name: "Free" },
-    { "@type": "Offer", price: "4.99", priceCurrency: "USD", name: "Lifetime" },
-    { "@type": "Offer", price: "9.99", priceCurrency: "USD", name: "Monthly" },
+    {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      name: "Free download",
+    },
+    {
+      "@type": "Offer",
+      price: "4.99",
+      priceCurrency: "USD",
+      name: "Lifetime in-app purchase",
+    },
+    {
+      "@type": "Offer",
+      price: "9.99",
+      priceCurrency: "USD",
+      name: "Monthly subscription",
+    },
   ],
   /*
    * aggregateRating intentionally omitted until verified Play Store reviews exist.
@@ -138,6 +156,14 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <meta name="theme-color" content="#0a0a0d" />
+        <meta
+          name="google-play-app"
+          content={`app-id=${ANDROID_PACKAGE_ID}`}
+        />
+        <link
+          rel="alternate"
+          href={`android-app://${ANDROID_PACKAGE_ID}/https/getcertforge.app/`}
+        />
       </head>
       <body className="min-h-full flex flex-col">
         {children}
