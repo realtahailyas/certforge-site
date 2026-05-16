@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
 import { faqEntries } from "./_data/faq";
 import { ANDROID_PACKAGE_ID, PLAY_STORE_URL } from "./_config/site";
 import "./globals.css";
@@ -166,29 +165,28 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        {children}
-        <Script
-          id="ld-software-application"
+        {/*
+          JSON-LD is rendered as native <script type="application/ld+json"> tags
+          (not next/script) so the schema is baked into the server-rendered HTML
+          and visible to crawlers without executing JS.
+        */}
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(softwareApplicationSchema),
           }}
         />
-        <Script
-          id="ld-faq"
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
         />
-        <Script
-          id="ld-organization"
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        {children}
       </body>
     </html>
   );
