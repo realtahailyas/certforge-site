@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: "CertForge",
     title: "CertForge — AWS Cloud Practitioner (CLF-C02) Prep, Reimagined",
     description:
-      "Free Android app to pass the AWS Cloud Practitioner (CLF-C02) on your first try. 800+ adaptive questions, exam simulator, and a live readiness score. Download free on Google Play.",
+      "Free Android app to pass the AWS Cloud Practitioner (CLF-C02) on your first try. 100 starter questions + 20 free daily — full unlock for $14.99. Download free on Google Play.",
     // TODO: Taha to generate a 1200x630 OG image in Canva and place at /public/og.png
     images: [
       {
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CertForge — Adaptive AWS Cloud Practitioner Prep",
     description:
-      "Free Android app to pass the AWS Cloud Practitioner (CLF-C02) on your first try. 800+ adaptive questions, exam simulator, and a live readiness score. Download free on Google Play.",
+      "Pass CLF-C02 on your first try. 100 Qs free + 20 daily. Full unlock $14.99 lifetime. Free on Google Play.",
     images: [SITE_URL + "/og.png"],
   },
 };
@@ -86,26 +86,26 @@ const softwareApplicationSchema = {
   downloadUrl: PLAY_STORE_URL,
   installUrl: PLAY_STORE_URL,
   description:
-    "Adaptive AWS Cloud Practitioner (CLF-C02) exam preparation app with 800+ practice questions, weakness detection, real exam simulator, and a live readiness score. Free to download on Google Play.",
+    "Adaptive AWS Cloud Practitioner (CLF-C02) exam preparation app with 800+ practice questions, weakness detection, real exam simulator, and a live readiness score. Free to install — 100 starter questions plus 20 fresh questions daily. Full unlock $4.99/month or $14.99 lifetime.",
   url: SITE_URL + "/",
   offers: [
     {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
-      name: "Free download",
+      name: "Free download — 100 questions + 20 daily",
     },
     {
       "@type": "Offer",
       price: "4.99",
       priceCurrency: "USD",
-      name: "Lifetime in-app purchase",
+      name: "Monthly subscription",
     },
     {
       "@type": "Offer",
-      price: "9.99",
+      price: "14.99",
       priceCurrency: "USD",
-      name: "Monthly subscription",
+      name: "Lifetime in-app purchase",
     },
   ],
   /*

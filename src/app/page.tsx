@@ -2,7 +2,10 @@ import Link from "next/link";
 import Faq from "./_components/Faq";
 import PlayStoreButton from "./_components/PlayStoreButton";
 import WaitlistForm from "./_components/WaitlistForm";
-import { IS_PUBLICLY_LIVE, PLAY_STORE_URL } from "./_config/site";
+import { IS_PUBLICLY_LIVE, PLAY_STORE_URL, PRICING } from "./_config/site";
+
+const fmtPrice = (n: number) =>
+  Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
 import { faqEntries } from "./_data/faq";
 
 const ACCOUNT_DELETION_URL =
@@ -262,13 +265,13 @@ function Hero() {
               <span aria-hidden="true" className="text-[var(--cyan)]">
                 ●
               </span>
-              Free to download
+              Free to download · Daily {PRICING.FREE_QUESTIONS_DAILY} Q claim
             </li>
             <li className="flex items-center gap-2">
               <span aria-hidden="true" className="text-[var(--cyan)]">
                 ●
               </span>
-              $4.99 unlock everything
+              {fmtPrice(PRICING.LIFETIME_PRICE)} lifetime unlock
             </li>
           </ul>
         </div>
@@ -374,7 +377,10 @@ function StatsBand() {
     { n: "800+", label: "CLF-C02 questions" },
     { n: "65q · 90min", label: "Real exam simulator" },
     { n: "4", label: "Exam domains covered" },
-    { n: "$4.99", label: "Lifetime · no subscription trap" },
+    {
+      n: fmtPrice(PRICING.LIFETIME_PRICE),
+      label: `Lifetime unlock · or ${fmtPrice(PRICING.MONTHLY_PRICE)}/mo`,
+    },
   ];
   return (
     <section
@@ -429,7 +435,9 @@ function ProblemSection() {
       predicts your real exam outcome before you book it
     </>,
     <>
-      $4.99 lifetime. Built for solo studiers, not enterprise budgets.
+      {fmtPrice(PRICING.LIFETIME_PRICE)} lifetime (or{" "}
+      {fmtPrice(PRICING.MONTHLY_PRICE)}/mo). Built for solo studiers, not
+      enterprise budgets.
     </>,
     <>
       Updated against the current CLF-C02 exam guide. Every question mapped to
@@ -1280,9 +1288,9 @@ function PricingSection() {
           Honest pricing. No subscription trap.
         </h2>
         <p className="mx-auto mt-5 max-w-[600px] text-[17px] leading-[1.65] text-[var(--text-2)]">
-          Most candidates pass the exam within 2–4 weeks. The lifetime tier is
-          $4.99 because we&apos;d rather you actually use it once than rent it
-          from us forever.
+          Most candidates pass the exam within 2–4 weeks. The lifetime tier is{" "}
+          {fmtPrice(PRICING.LIFETIME_PRICE)} — pays for itself the moment you
+          pass, then stays useful for every AWS cert that comes next.
         </p>
       </div>
 
@@ -1290,24 +1298,26 @@ function PricingSection() {
         <PricingCard
           name="Free"
           price="$0 forever"
-          tag="Try it before you commit."
+          tag="Drill daily. Claim more every day."
           active={[
-            "30 practice questions",
+            `${PRICING.FREE_QUESTIONS_INITIAL} starter practice questions`,
+            `+${PRICING.FREE_QUESTIONS_DAILY} fresh questions every day (1 daily claim)`,
             "All 4 domains accessible",
-            "Basic progress tracking",
             "XP & streak system",
+            "Basic progress tracking",
           ]}
           inactive={[
             "Full 800+ question bank",
-            "Exam simulator",
+            "Timed exam simulator",
             "Live readiness score",
+            "Concept-level analytics",
           ]}
           cta={{ label: "Install Free" }}
         />
         <PricingCard
           name="Lifetime"
-          price="$4.99 once"
-          tag="Cheaper than the exam fee 20×."
+          price={`${fmtPrice(PRICING.LIFETIME_PRICE)} once`}
+          tag="Pays for itself the moment you pass."
           featured
           active={[
             "Everything in Free, plus:",
@@ -1317,6 +1327,7 @@ function PricingSection() {
             "3-step wrong-answer feedback",
             "Concept-level weakness analytics",
             "Lifetime updates as CLF-C02 evolves",
+            "Useful for future AWS certs too",
           ]}
           cta={{
             label: "Get the App",
@@ -1326,9 +1337,13 @@ function PricingSection() {
         />
         <PricingCard
           name="Monthly"
-          price="$9.99 /mo"
-          tag="Prefer to pay as you go."
-          active={["Everything in Lifetime", "Cancel anytime", "For longer-term cert paths"]}
+          price={`${fmtPrice(PRICING.MONTHLY_PRICE)} /mo`}
+          tag="Most people pass in 2–4 weeks. Subscribe just for that window."
+          active={[
+            "Everything in Lifetime",
+            "Cancel anytime",
+            "Ideal for a single cert-prep sprint",
+          ]}
           cta={{ label: "Get the App", subtext: "→ Choose Monthly in-app" }}
         />
       </div>
@@ -1496,15 +1511,20 @@ function FinalCta() {
             Stop reading. Start drilling.
           </h2>
           <p className="mx-auto mt-5 max-w-[600px] text-[17px] leading-[1.6] text-[var(--text-2)]">
-            CertForge is free to install on Android. Drill 30 practice
-            questions, see your readiness score, and unlock the full bank for
-            $4.99 lifetime — all inside the app.
+            CertForge is free to install on Android. Drill{" "}
+            {PRICING.FREE_QUESTIONS_INITIAL} starter questions plus{" "}
+            {PRICING.FREE_QUESTIONS_DAILY} fresh ones every day, see your
+            readiness score, and unlock the full bank for{" "}
+            {fmtPrice(PRICING.LIFETIME_PRICE)} lifetime (or{" "}
+            {fmtPrice(PRICING.MONTHLY_PRICE)}/mo) — all inside the app.
           </p>
           <div className="mt-8 flex justify-center">
             <PlayStoreButton variant="primary" size="large" />
           </div>
           <p className="mt-5 font-mono text-[12px] text-[var(--text-3)]">
-            Free · 800+ questions · No account required to start
+            Free to install · {PRICING.FREE_QUESTIONS_INITIAL} Qs +{" "}
+            {PRICING.FREE_QUESTIONS_DAILY} daily free ·{" "}
+            {fmtPrice(PRICING.LIFETIME_PRICE)} unlocks everything
           </p>
 
           {!IS_PUBLICLY_LIVE ? (

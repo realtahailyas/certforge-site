@@ -14,3 +14,13 @@ export const ANDROID_PACKAGE_ID = "com.getcertforge.app";
 export const IS_PUBLICLY_LIVE = false;
 
 export const SITE_URL = "https://getcertforge.app";
+
+// Single source of truth for every dollar amount surfaced on the site.
+// Update prices here only — JSX must read from this constant, never inline.
+export const PRICING = {
+  FREE_QUESTIONS_INITIAL: 100,
+  FREE_QUESTIONS_DAILY: 20,
+  MONTHLY_PRICE: 4.99,
+  LIFETIME_PRICE: 14.99,
+  EXAM_FEE_USD: 100,
+} as const;

@@ -19,7 +19,7 @@ export const faqEntries: FaqEntry[] = [
   },
   {
     q: "Is CertForge free?",
-    a: "Yes. The free tier includes the first 30 questions across all four domains plus weakness tracking. Unlocking the full 800+ question bank, the timed exam simulator, and advanced analytics costs $4.99 lifetime or $9.99 per month.",
+    a: "Yes — the app is free to install. The free tier includes 100 starter practice questions plus 20 fresh questions every day you log in (one daily claim, resets at midnight local time). Unlocking the full 800+ question bank, the timed exam simulator, and advanced analytics costs $4.99 per month or $14.99 lifetime.",
   },
   {
     q: "Are CertForge questions similar to the real AWS exam?",
