@@ -220,6 +220,129 @@ body {
   box-shadow: 0 0 0 3px var(--cyan-dim);
 }
 
+/* Blog article typography */
+.cf-prose {
+  color: var(--text-2);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.cf-prose > * + * {
+  margin-top: 1.4em;
+}
+
+.cf-prose h2 {
+  margin-top: 2.4em;
+  font-weight: 800;
+  font-size: clamp(21px, 2.6vw, 27px);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.cf-prose h3 {
+  margin-top: 1.8em;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.cf-prose p {
+  color: var(--text-2);
+}
+
+.cf-prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.cf-prose a {
+  color: var(--cyan);
+  text-underline-offset: 3px;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 212, 255, 0.35);
+}
+
+.cf-prose a:hover {
+  text-decoration-color: var(--cyan);
+}
+
+.cf-prose ul,
+.cf-prose ol {
+  padding-left: 1.4em;
+  color: var(--text-2);
+}
+
+.cf-prose ul {
+  list-style: disc;
+}
+
+.cf-prose ol {
+  list-style: decimal;
+}
+
+.cf-prose li + li {
+  margin-top: 0.6em;
+}
+
+.cf-prose li::marker {
+  color: var(--cyan);
+}
+
+.cf-prose blockquote {
+  margin-top: 1.6em;
+  border-left: 2px solid var(--cyan);
+  background: var(--surface);
+  padding: 0.9em 1.4em;
+  border-radius: 0 10px 10px 0;
+  color: var(--text-2);
+  font-style: italic;
+}
+
+.cf-prose code {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 0.9em;
+  background: var(--surface-hi);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.1em 0.4em;
+  color: var(--cyan);
+}
+
+.cf-prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.4em 0;
+}
+
+.cf-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.cf-prose th,
+.cf-prose td {
+  border: 1px solid var(--border);
+  padding: 0.7em 1em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.cf-prose th {
+  background: var(--surface-hi);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cf-prose td {
+  color: var(--text-2);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

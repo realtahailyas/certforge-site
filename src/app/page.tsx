@@ -1,5 +1,6 @@
-import Link from "next/link";
-import Faq from "./_components/Faq";
+﻿import Faq from "./_components/Faq";
+import Footer from "./_components/Footer";
+import Nav from "./_components/Nav";
 import PlayStoreButton from "./_components/PlayStoreButton";
 import WaitlistForm from "./_components/WaitlistForm";
 import { IS_PUBLICLY_LIVE, PLAY_STORE_URL, PRICING } from "./_config/site";
@@ -7,27 +8,6 @@ import { IS_PUBLICLY_LIVE, PLAY_STORE_URL, PRICING } from "./_config/site";
 const fmtPrice = (n: number) =>
   Number.isInteger(n) ? `$${n}` : `$${n.toFixed(2)}`;
 import { faqEntries } from "./_data/faq";
-
-const ACCOUNT_DELETION_URL =
-  "https://optiviomedia.notion.site/CertForge-Account-Deletion"; // placeholder; Taha's published Notion page
-
-// -- Logo -----------------------------------------------------------------
-
-function Logo({ height = 28 }: { height?: number }) {
-  // SVG aspect ratio is 771.71 / 146.25 ≈ 5.276
-  const width = Math.round(height * 5.276);
-  return (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img
-      src="/brand/wordmark.svg"
-      alt="CertForge"
-      width={width}
-      height={height}
-      style={{ height, width: "auto", display: "block" }}
-      draggable={false}
-    />
-  );
-}
 
 // -- Eyebrows --------------------------------------------------------------
 
@@ -173,8 +153,8 @@ function Hero() {
               className="cf-pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-[var(--green)] shadow-[0_0_8px_var(--green)]"
             />
             {IS_PUBLICLY_LIVE
-              ? "Now on Google Play · 100% free to start"
-              : "Launching soon on Google Play · CLF-C02"}
+              ? "Now on Google Play Â· 100% free to start"
+              : "Launching soon on Google Play Â· CLF-C02"}
           </div>
 
           <h1
@@ -224,7 +204,7 @@ function Hero() {
             className="cf-fade-up mt-4 font-mono text-[12px] text-[var(--text-3)]"
             style={{ animationDelay: "0.3s" }}
           >
-            Free download · No signup required to start · Android 8.0+
+            Free download Â· No signup required to start Â· Android 8.0+
           </p>
 
           {!IS_PUBLICLY_LIVE ? (
@@ -237,7 +217,7 @@ function Hero() {
                 href="#waitlist"
                 className="text-[var(--cyan)] underline underline-offset-2 hover:text-[var(--text)]"
               >
-                Get launch notice →
+                Get launch notice â†’
               </a>
             </p>
           ) : null}
@@ -248,26 +228,26 @@ function Hero() {
           >
             <li className="flex items-center gap-2">
               <span aria-hidden="true" className="text-[var(--cyan)]">
-                ●
+                â—
               </span>
               800+ CLF-C02 questions
             </li>
             <li className="flex items-center gap-2">
               <span aria-hidden="true" className="text-[var(--cyan)]">
-                ●
+                â—
               </span>
-              Free to download · Daily {PRICING.FREE_QUESTIONS_DAILY} Q claim
+              Free to download Â· Daily {PRICING.FREE_QUESTIONS_DAILY} Q claim
             </li>
             <li className="flex items-center gap-2">
               <span aria-hidden="true" className="text-[var(--cyan)]">
-                ●
+                â—
               </span>
               {fmtPrice(PRICING.LIFETIME_PRICE)} lifetime unlock
             </li>
           </ul>
         </div>
 
-        {/* Right — Readiness Dashboard */}
+        {/* Right â€” Readiness Dashboard */}
         <div
           className="cf-fade-in lg:mt-2"
           style={{ animationDelay: "0.2s" }}
@@ -281,7 +261,7 @@ function Hero() {
                 <span className="h-2.5 w-2.5 rounded-full bg-[#3a3a44]" />
               </div>
               <span className="font-mono text-[11px] text-[var(--text-3)]">
-                certforge — readiness.dashboard
+                certforge â€” readiness.dashboard
               </span>
               <span className="w-12" aria-hidden="true" />
             </div>
@@ -345,11 +325,11 @@ function Hero() {
 
               <div className="flex items-center justify-between border-t border-dashed border-[var(--border-hi)] pt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-3)]">
                 <span>
-                  Streak <span className="text-[var(--text-2)]">·</span>{" "}
+                  Streak <span className="text-[var(--text-2)]">Â·</span>{" "}
                   <span className="text-[var(--text)]">12 days</span>
                 </span>
                 <span>
-                  Next <span className="text-[var(--text-2)]">·</span>{" "}
+                  Next <span className="text-[var(--text-2)]">Â·</span>{" "}
                   <span className="text-[var(--text)]">IAM roles</span>
                 </span>
               </div>
@@ -366,11 +346,11 @@ function Hero() {
 function StatsBand() {
   const stats: Array<{ n: string; label: string }> = [
     { n: "800+", label: "CLF-C02 questions" },
-    { n: "65q · 90min", label: "Real exam simulator" },
+    { n: "65q Â· 90min", label: "Real exam simulator" },
     { n: "4", label: "Exam domains covered" },
     {
       n: fmtPrice(PRICING.LIFETIME_PRICE),
-      label: `Lifetime unlock · or ${fmtPrice(PRICING.MONTHLY_PRICE)}/mo`,
+      label: `Lifetime unlock Â· or ${fmtPrice(PRICING.MONTHLY_PRICE)}/mo`,
     },
   ];
   return (
@@ -414,12 +394,12 @@ function ProblemSection() {
       <strong className="text-[var(--text)]">
         domain, subtopic, and concept
       </strong>{" "}
-      — we know exactly what tripped you up
+      â€” we know exactly what tripped you up
     </>,
     <>
       Wrong answer triggers a{" "}
       <strong className="text-[var(--text)]">three-step explanation</strong>{" "}
-      plus 3–5 follow-up drill questions on that exact concept
+      plus 3â€“5 follow-up drill questions on that exact concept
     </>,
     <>
       Live <strong className="text-[var(--text)]">readiness score</strong>{" "}
@@ -459,7 +439,7 @@ function ProblemSection() {
       <div className="mt-12 grid gap-5 md:grid-cols-2">
         <div className="rounded-2xl border border-[rgba(255,107,107,0.25)] bg-[rgba(255,107,107,0.04)] p-6 sm:p-8">
           <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-[var(--red)]">
-            ❌ Other AWS prep apps
+            âŒ Other AWS prep apps
           </p>
           <ul className="mt-5 space-y-3.5 text-[15px] leading-[1.6] text-[var(--text-2)]">
             {bad.map((line, i) => (
@@ -473,7 +453,7 @@ function ProblemSection() {
 
         <div className="rounded-2xl border border-[rgba(0,212,255,0.28)] bg-[rgba(0,212,255,0.04)] p-6 sm:p-8">
           <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-[var(--cyan)]">
-            ✓ CertForge
+            âœ“ CertForge
           </p>
           <ul className="mt-5 space-y-3.5 text-[15px] leading-[1.6] text-[var(--text-2)]">
             {good.map((line, i) => (
@@ -549,13 +529,13 @@ function FeaturesSection() {
       index: "02",
       Icon: IconChart,
       title: "Live Readiness Score",
-      body: "A continuously updated pass-probability score. “You're 72% ready. Focus on IAM and S3 pricing to reach 85%.” Know exactly when to book your exam, with zero guesswork.",
+      body: "A continuously updated pass-probability score. â€œYou're 72% ready. Focus on IAM and S3 pricing to reach 85%.â€ Know exactly when to book your exam, with zero guesswork.",
     },
     {
       index: "03",
       Icon: IconCheck,
       title: "3-Step Wrong-Answer Feedback",
-      body: "After every wrong answer: what went wrong → why the right answer is right → which concept you need to revisit. Then 3–5 drill questions queue automatically on that exact concept.",
+      body: "After every wrong answer: what went wrong â†’ why the right answer is right â†’ which concept you need to revisit. Then 3â€“5 drill questions queue automatically on that exact concept.",
     },
     {
       index: "04",
@@ -567,7 +547,7 @@ function FeaturesSection() {
       index: "05",
       Icon: IconLayers,
       title: "Concept-Level Weakness Maps",
-      body: "Not just “weak in Security.” We track concepts: IAM roles vs IAM users, S3 storage class pricing, shared responsibility model. The drill-down shows precisely where to spend your next study session.",
+      body: "Not just â€œweak in Security.â€ We track concepts: IAM roles vs IAM users, S3 storage class pricing, shared responsibility model. The drill-down shows precisely where to spend your next study session.",
     },
     {
       index: "06",
@@ -591,7 +571,7 @@ function FeaturesSection() {
             lineHeight: 1.1,
           }}
         >
-          A smart tutor in your pocket — not a quiz app.
+          A smart tutor in your pocket â€” not a quiz app.
         </h2>
         <p className="mt-5 text-[17px] leading-[1.65] text-[var(--text-2)]">
           The features that turn 4 hours of studying into actual progress, not
@@ -624,13 +604,13 @@ function DomainsSection() {
       title: "Security & Compliance",
       pct: "30%",
       body:
-        "Shared Responsibility Model, IAM, security services, compliance frameworks, encryption. The largest domain on the exam — and where most candidates lose points.",
+        "Shared Responsibility Model, IAM, security services, compliance frameworks, encryption. The largest domain on the exam â€” and where most candidates lose points.",
     },
     {
       title: "Cloud Technology & Services",
       pct: "34%",
       body:
-        "EC2, S3, RDS, Lambda, VPC, CloudFront, deployment methods. The big surface area domain — knowing which service fits which use case.",
+        "EC2, S3, RDS, Lambda, VPC, CloudFront, deployment methods. The big surface area domain â€” knowing which service fits which use case.",
     },
     {
       title: "Billing, Pricing & Support",
@@ -788,7 +768,7 @@ function SampleQuestionSection() {
             docs&rdquo; cop-out.
           </p>
           <p className="mt-6 inline-flex items-center rounded-md border border-[var(--border-hi)] bg-[var(--surface)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-3)]">
-            Domain: Security &amp; Compliance · Difficulty: Medium
+            Domain: Security &amp; Compliance Â· Difficulty: Medium
           </p>
         </div>
 
@@ -839,15 +819,15 @@ function SampleQuestionSection() {
               }}
             >
               <p className="text-[14.5px] leading-[1.65] text-[var(--text-2)]">
-                <strong className="text-[var(--green)]">✓ Correct.</strong>{" "}
+                <strong className="text-[var(--green)]">âœ“ Correct.</strong>{" "}
                 Under the Shared Responsibility Model, AWS handles security{" "}
                 <em>of</em> the cloud (hardware, hypervisor, physical security),
-                while the customer handles security <em>in</em> the cloud — that
+                while the customer handles security <em>in</em> the cloud â€” that
                 includes IAM configuration, data encryption choices, and network
                 controls.
               </p>
               <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--cyan)]">
-                {"// Concept flagged: Shared Responsibility Model · 3 follow-up questions queued"}
+                {"// Concept flagged: Shared Responsibility Model Â· 3 follow-up questions queued"}
               </p>
             </div>
           </div>
@@ -916,7 +896,7 @@ function ScreenHome() {
     >
       <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em] text-[var(--text-3)]">
         <span>9:41</span>
-        <span>● ● ●</span>
+        <span>â— â— â—</span>
       </div>
       <div className="font-mono text-[8px] uppercase tracking-[0.14em] text-[var(--text-3)]">
         {"// Readiness"}
@@ -959,10 +939,10 @@ function ScreenHome() {
       </div>
       <div className="mt-auto rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2">
         <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-[var(--text-3)]">
-          Streak · 12 days
+          Streak Â· 12 days
         </p>
         <p className="mt-0.5 text-[9.5px] font-semibold text-[var(--text)]">
-          Continue → IAM Roles
+          Continue â†’ IAM Roles
         </p>
       </div>
     </div>
@@ -987,7 +967,7 @@ function ScreenQuestion() {
     >
       <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em] text-[var(--text-3)]">
         <span>Q 14 / 65</span>
-        <span className="text-[var(--cyan)]">● Live</span>
+        <span className="text-[var(--cyan)]">â— Live</span>
       </div>
       <p className="text-[10px] font-semibold leading-[1.3] text-[var(--text)]">
         Which is the customer&apos;s responsibility under the AWS Shared
@@ -1033,10 +1013,10 @@ function ScreenQuestion() {
         }}
       >
         <p className="font-mono text-[7.5px] uppercase tracking-[0.14em] text-[var(--green)]">
-          ✓ Correct
+          âœ“ Correct
         </p>
         <p className="mt-0.5 text-[8px] leading-[1.4] text-[var(--text-2)]">
-          You handle security <em>in</em> the cloud — IAM, encryption, network.
+          You handle security <em>in</em> the cloud â€” IAM, encryption, network.
         </p>
       </div>
     </div>
@@ -1115,7 +1095,7 @@ function ScreenshotsSection() {
   return (
     <section className="mx-auto w-full max-w-[1200px] px-6 py-20 lg:px-10 lg:py-28">
       {/* TODO: Replace SVG mockups with real app screenshots once available.
-          Recommended: 3 PNG files at 1080×1920, placed in public/screens/ */}
+          Recommended: 3 PNG files at 1080Ã—1920, placed in public/screens/ */}
       <div className="max-w-[760px]">
         <SectionEyebrow>[ Inside the App ]</SectionEyebrow>
         <h2
@@ -1135,14 +1115,14 @@ function ScreenshotsSection() {
       </div>
 
       <div className="mt-14 grid items-start justify-items-center gap-10 sm:grid-cols-3 sm:gap-6">
-        <PhoneFrame kind="home" caption="// HOME · READINESS DASHBOARD" />
+        <PhoneFrame kind="home" caption="// HOME Â· READINESS DASHBOARD" />
         <PhoneFrame
           kind="question"
-          caption="// QUESTION · INSTANT FEEDBACK"
+          caption="// QUESTION Â· INSTANT FEEDBACK"
         />
         <PhoneFrame
           kind="weakness"
-          caption="// WEAKNESS · CONCEPT-LEVEL DRILL-DOWN"
+          caption="// WEAKNESS Â· CONCEPT-LEVEL DRILL-DOWN"
         />
       </div>
     </section>
@@ -1229,7 +1209,7 @@ function PricingCard({
             className="flex gap-3 text-[var(--text-muted)]"
           >
             <span aria-hidden="true" className="mt-1 inline-block w-4 flex-none font-mono">
-              –
+              â€“
             </span>
             <span>{item}</span>
           </li>
@@ -1240,7 +1220,7 @@ function PricingCard({
         href={PLAY_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`${cta.label}${cta.subtext ? " — " + cta.subtext : ""}`}
+        aria-label={`${cta.label}${cta.subtext ? " â€” " + cta.subtext : ""}`}
         className={
           (cta.primary ? "cf-btn-primary" : "cf-btn-secondary") +
           " mt-8 inline-flex flex-col items-center justify-center rounded-xl px-5 py-3 text-[14px] font-semibold"
@@ -1279,8 +1259,8 @@ function PricingSection() {
           Honest pricing. No subscription trap.
         </h2>
         <p className="mx-auto mt-5 max-w-[600px] text-[17px] leading-[1.65] text-[var(--text-2)]">
-          Most candidates pass the exam within 2–4 weeks. The lifetime tier is{" "}
-          {fmtPrice(PRICING.LIFETIME_PRICE)} — pays for itself the moment you
+          Most candidates pass the exam within 2â€“4 weeks. The lifetime tier is{" "}
+          {fmtPrice(PRICING.LIFETIME_PRICE)} â€” pays for itself the moment you
           pass, then stays useful for every AWS cert that comes next.
         </p>
       </div>
@@ -1313,7 +1293,7 @@ function PricingSection() {
           active={[
             "Everything in Free, plus:",
             "Full 800+ question bank",
-            "Timed exam simulator (65q · 90min)",
+            "Timed exam simulator (65q Â· 90min)",
             "Live readiness score & predictions",
             "3-step wrong-answer feedback",
             "Concept-level weakness analytics",
@@ -1322,20 +1302,20 @@ function PricingSection() {
           ]}
           cta={{
             label: "Get the App",
-            subtext: "→ Choose Lifetime in-app",
+            subtext: "â†’ Choose Lifetime in-app",
             primary: true,
           }}
         />
         <PricingCard
           name="Monthly"
           price={`${fmtPrice(PRICING.MONTHLY_PRICE)} /mo`}
-          tag="Most people pass in 2–4 weeks. Subscribe just for that window."
+          tag="Most people pass in 2â€“4 weeks. Subscribe just for that window."
           active={[
             "Everything in Lifetime",
             "Cancel anytime",
             "Ideal for a single cert-prep sprint",
           ]}
-          cta={{ label: "Get the App", subtext: "→ Choose Monthly in-app" }}
+          cta={{ label: "Get the App", subtext: "â†’ Choose Monthly in-app" }}
         />
       </div>
 
@@ -1361,7 +1341,7 @@ function Testimonials() {
       quote:
         "Most AWS apps just dump 500 questions at you. CertForge tells you why you got it wrong and immediately gives you 3 more on the same concept. That feedback loop is the whole game.",
       name: "A.S.",
-      role: "IT Support → DevOps transition",
+      role: "IT Support â†’ DevOps transition",
       initials: "AS",
     },
     {
@@ -1403,7 +1383,7 @@ function Testimonials() {
               className="text-[var(--amber)]"
               style={{ letterSpacing: 2 }}
             >
-              ★★★★★
+              â˜…â˜…â˜…â˜…â˜…
             </div>
             <blockquote className="mt-4 flex-1 text-[15px] leading-[1.65] text-[var(--text-2)]">
               &ldquo;{t.quote}&rdquo;
@@ -1507,14 +1487,14 @@ function FinalCta() {
             {PRICING.FREE_QUESTIONS_DAILY} fresh ones every day, see your
             readiness score, and unlock the full bank for{" "}
             {fmtPrice(PRICING.LIFETIME_PRICE)} lifetime (or{" "}
-            {fmtPrice(PRICING.MONTHLY_PRICE)}/mo) — all inside the app.
+            {fmtPrice(PRICING.MONTHLY_PRICE)}/mo) â€” all inside the app.
           </p>
           <div className="mt-8 flex justify-center">
             <PlayStoreButton variant="primary" size="large" />
           </div>
           <p className="mt-5 font-mono text-[12px] text-[var(--text-3)]">
-            Free to install · {PRICING.FREE_QUESTIONS_INITIAL} Qs +{" "}
-            {PRICING.FREE_QUESTIONS_DAILY} daily free ·{" "}
+            Free to install Â· {PRICING.FREE_QUESTIONS_INITIAL} Qs +{" "}
+            {PRICING.FREE_QUESTIONS_DAILY} daily free Â·{" "}
             {fmtPrice(PRICING.LIFETIME_PRICE)} unlocks everything
           </p>
 
@@ -1548,201 +1528,6 @@ function FinalCta() {
         </div>
       </div>
     </section>
-  );
-}
-
-// -- Nav -------------------------------------------------------------------
-
-function Nav() {
-  return (
-    <header
-      className="sticky top-0 z-50 backdrop-blur-[16px]"
-      style={{
-        background: "rgba(10, 10, 13, 0.7)",
-        borderBottom: "1px solid var(--border)",
-      }}
-    >
-      <nav
-        aria-label="Primary"
-        className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-3.5 lg:px-10"
-      >
-        <Link href="/" className="inline-flex items-center" aria-label="CertForge home">
-          <Logo />
-        </Link>
-        <div className="flex items-center gap-2 sm:gap-7">
-          <ul className="hidden items-center gap-7 text-[14px] text-[var(--text-2)] md:flex" role="list">
-            <li>
-              <a href="#features" className="hover:text-[var(--text)]">
-                Features
-              </a>
-            </li>
-            <li>
-              <a href="#pricing" className="hover:text-[var(--text)]">
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a href="#faq" className="hover:text-[var(--text)]">
-                FAQ
-              </a>
-            </li>
-          </ul>
-          <PlayStoreButton variant="badge" />
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-// -- Footer ----------------------------------------------------------------
-
-function Footer() {
-  const colHead =
-    "font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-3)]";
-  return (
-    <footer className="mt-12 border-t border-[var(--border)] bg-[var(--bg-elev)]">
-      <div className="mx-auto w-full max-w-[1200px] px-6 py-14 lg:px-10">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <Link
-              href="/"
-              className="inline-flex items-center"
-              aria-label="CertForge home"
-            >
-              <Logo height={32} />
-            </Link>
-            <p className="mt-4 max-w-[280px] text-[14px] leading-[1.6] text-[var(--text-2)]">
-              Adaptive AWS exam prep. Built by Optivio Media.
-            </p>
-          </div>
-          <div>
-            <p className={colHead}>Product</p>
-            <ul className="mt-4 space-y-3 text-[14px] text-[var(--text-2)]" role="list">
-              <li>
-                <a href="#features" className="hover:text-[var(--text)]">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#pricing" className="hover:text-[var(--text)]">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#faq" className="hover:text-[var(--text)]">
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a
-                  href={PLAY_STORE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[var(--text)]"
-                >
-                  Download on Google Play
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className={colHead}>Resources</p>
-            <ul className="mt-4 space-y-3 text-[14px] text-[var(--text-2)]" role="list">
-              <li>
-                <a
-                  href="https://aws.amazon.com/certification/certified-cloud-practitioner/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-[var(--text)]"
-                >
-                  AWS CLF-C02 Exam Guide
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-[var(--text)]">
-                  Free Study Plan
-                </a>
-              </li>
-              <li>
-                <a href="#domains" className="hover:text-[var(--text)]">
-                  Domain Breakdown
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className={colHead}>Legal &amp; Company</p>
-            <ul className="mt-4 space-y-3 text-[14px] text-[var(--text-2)]" role="list">
-              <li>
-                <Link href="/privacy" className="hover:text-[var(--text)]">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-[var(--text)]">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <a
-                  href={ACCOUNT_DELETION_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-[var(--text)]"
-                >
-                  Account Deletion
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://optiviomedia.online"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-[var(--text)]"
-                >
-                  Optivio Media
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-[var(--border)] pt-6 sm:flex-row sm:items-center">
-          <p className="text-[12.5px] text-[var(--text-3)]">
-            © 2026 Optivio Media · All rights reserved.
-          </p>
-          <ul className="flex items-center gap-3" role="list">
-            <li>
-              <a
-                aria-label="Taha Ilyas on LinkedIn"
-                href="https://linkedin.com/in/tahailyas"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-hi)] text-[var(--text-2)] hover:border-[var(--cyan)] hover:text-[var(--cyan)]"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.02h4.55V24H.22V8.02zM8.34 8.02h4.36v2.18h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v9.16h-4.55v-8.12c0-1.94-.03-4.44-2.7-4.44-2.71 0-3.12 2.12-3.12 4.31V24H8.34V8.02z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                aria-label="Optivio Media website"
-                href="https://optiviomedia.online"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-hi)] text-[var(--text-2)] hover:border-[var(--cyan)] hover:text-[var(--cyan)]"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
-                  <path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" stroke="currentColor" strokeWidth="1.6" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
   );
 }
 
