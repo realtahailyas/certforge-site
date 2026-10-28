@@ -42,3 +42,29 @@ next-env.d.ts
 
 # claude code local settings
 .claude/
+
+# Secrets & build artifacts (security hardening)
+.env
+.env.*
+!.env.example
+*.local
+*.jks
+*.keystore
+keystore.properties
+credentials/
+*service-account*.json
+tchess-*-*.json
+client_secret*.json
+*.p12
+*.key
+.secrets/
+*.aab
+*.apk
+*.log
+.claude/settings.local.json
+dist/
+
+# AI-agent scaffolding (kept locally, not tracked)
+AGENTS.md
+CLAUDE.md
+*PROMPT*.md
