@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CertForge Site
 
-## Getting Started
+Marketing site and SEO blog for **CertForge**, an Android exam-prep app for the AWS Certified Cloud Practitioner (CLF-C02) exam.
 
-First, run the development server:
+[![Get it on Google Play](https://img.shields.io/badge/Google_Play-CertForge-414141?logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.getcertforge.app)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Live: https://getcertforge.app · App: [CertForge on Google Play](https://play.google.com/store/apps/details?id=com.getcertforge.app)
+
+## Features
+
+- **Conversion-focused landing page**: every primary CTA leads to the Play Store install.
+- **SEO blog**: 5 long-form CLF-C02 guides (study guide, exam tips, practice questions, cost and format, CLF-C02 vs SAA).
+- **Structured data**: JSON-LD (app, FAQ, articles) rendered server-side, plus Open Graph and Twitter cards.
+- **Dynamic `robots.txt` and `sitemap.xml`** generated from the blog index.
+- **Supabase auth pages**: email callback and password reset for the mobile app's accounts.
+- **Waitlist endpoint** (`/api/waitlist`) for pre-launch email capture.
+- **Privacy policy and terms** required by the Play listing.
+- **One config file** (`src/app/_config/site.ts`) holds the Play URL, site URL, launch flag and every price shown on the site.
+
+## Tech stack
+
+| Layer     | Choice                                         |
+| --------- | ---------------------------------------------- |
+| Framework | Next.js 16 (App Router, Turbopack), React 19   |
+| Language  | TypeScript (strict)                            |
+| Styling   | Tailwind CSS v4 with CSS-variable brand tokens |
+| Auth      | Supabase (`@supabase/supabase-js`)             |
+| Hosting   | Vercel                                         |
+
+## Architecture
+
+```mermaid
+flowchart LR
+  V[Visitor / search engine] --> N[Next.js on Vercel]
+  N --> L[Landing page + blog<br/>static, SEO metadata]
+  N --> W["/api/waitlist"]
+  N --> A["/auth/* pages"] --> S[(Supabase Auth)]
+  L --> P[Google Play listing]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Pages are statically rendered. Blog posts are TSX modules in `src/app/blog/_content/`, registered in `src/app/_data/blog.ts`, and served by the dynamic `blog/[slug]` route.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Getting started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Prerequisites: Node.js 20+ and npm.
 
-## Learn More
+```bash
+git clone https://github.com/realtahailyas/certforge-site.git
+cd certforge-site
+npm install
+cp .env.example .env.local   # fill in your Supabase URL and anon key
+npm run dev                  # http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+| Variable                        | Purpose                                 |
+| ------------------------------- | --------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL (auth pages)       |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public anon key (auth pages)   |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Other scripts: `npm run build`, `npm start`, `npm run lint`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
 
-## Deploy on Vercel
+```
+src/
+  app/
+    _components/   Nav, Footer, FAQ, PlayStoreButton, WaitlistForm
+    _config/       site.ts: Play URL, site URL, launch flag, pricing
+    _data/         blog index and FAQ content
+    api/waitlist/  POST endpoint for email signups
+    auth/          Supabase callback and password reset
+    blog/          blog index, [slug] route, post content
+    privacy/ terms/
+    robots.ts sitemap.ts layout.tsx page.tsx
+  lib/supabase.ts  browser Supabase client
+public/brand/      wordmark
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Status
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Live and deployed on Vercel. Planned: wire the waitlist endpoint to an email provider (it currently only logs and acknowledges), and add more CLF-C02 posts.
+
+## License
+
+[MIT](LICENSE) © 2026 Taha Ilyas
+
+## Author
+
+Built by [Taha Ilyas](https://github.com/realtahailyas) · Optivio Automation
