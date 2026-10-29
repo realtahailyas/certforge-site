@@ -39,6 +39,6 @@ export const faqEntries: FaqEntry[] = [
   },
   {
     q: "Is CertForge available on iOS?",
-    a: "CertForge is launching on Android first via Google Play. An iOS version is on the roadmap once the Android version is validated in production.",
+    a: "CertForge is Android-only for now, available on Google Play. There is no iOS version yet.",
   },
 ];

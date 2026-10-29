@@ -7,11 +7,12 @@ export const PLAY_STORE_URL =
 // Android package id mirrored separately so meta tags and the JSON-LD schema can stay in sync.
 export const ANDROID_PACKAGE_ID = "com.getcertforge.app";
 
-// Set to `true` once the app is publicly downloadable on Play Store.
-// While `false`, primary CTAs still link to PLAY_STORE_URL but a small
+// `true` = the app is publicly downloadable on Google Play (live in production).
+// When `false`, primary CTAs still link to PLAY_STORE_URL but a small
 // "Notify me at launch" fallback link is shown beneath the primary CTA, and
 // the email waitlist remains visible as a secondary block in the final CTA.
-export const IS_PUBLICLY_LIVE = false;
+// Android only: there is no iOS build, so no App Store links anywhere.
+export const IS_PUBLICLY_LIVE = true;
 
 export const SITE_URL = "https://getcertforge.app";
 
