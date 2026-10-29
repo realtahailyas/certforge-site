@@ -21,7 +21,16 @@ export default function Footer() {
               <Logo height={32} />
             </Link>
             <p className="mt-4 max-w-[280px] text-[14px] leading-[1.6] text-[var(--text-2)]">
-              Adaptive AWS exam prep. Built by Optivio Media.
+              Adaptive AWS exam prep by{" "}
+              <a
+                href="https://optivioautomation.com"
+                target="_blank"
+                rel="noopener"
+                className="underline underline-offset-2 hover:text-[var(--text)]"
+              >
+                Optivio Automation
+              </a>
+              .
             </p>
           </div>
           <div>
@@ -104,12 +113,22 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://optiviomedia.online"
+                  href="https://optivioautomation.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener"
                   className="hover:text-[var(--text)]"
                 >
-                  Optivio Media
+                  Optivio Automation
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://tahailyas.com"
+                  target="_blank"
+                  rel="noopener"
+                  className="hover:text-[var(--text)]"
+                >
+                  Founder: Taha Ilyas
                 </a>
               </li>
             </ul>
@@ -118,13 +137,13 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-[var(--border)] pt-6 sm:flex-row sm:items-center">
           <p className="text-[12.5px] text-[var(--text-3)]">
-            © 2026 Optivio Media · All rights reserved.
+            © 2026 Optivio Automation · All rights reserved.
           </p>
           <ul className="flex items-center gap-3" role="list">
             <li>
               <a
                 aria-label="Taha Ilyas on LinkedIn"
-                href="https://linkedin.com/in/tahailyas"
+                href="https://www.linkedin.com/in/tahailyas"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-hi)] text-[var(--text-2)] hover:border-[var(--cyan)] hover:text-[var(--cyan)]"
@@ -136,8 +155,8 @@ export default function Footer() {
             </li>
             <li>
               <a
-                aria-label="Optivio Media website"
-                href="https://optiviomedia.online"
+                aria-label="Optivio Automation website"
+                href="https://optivioautomation.com"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-hi)] text-[var(--text-2)] hover:border-[var(--cyan)] hover:text-[var(--cyan)]"

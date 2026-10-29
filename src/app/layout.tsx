@@ -76,9 +76,13 @@ export const metadata: Metadata = {
   },
 };
 
+const ORGANIZATION_ID = "https://optivioautomation.com/#organization";
+const PERSON_ID = "https://tahailyas.com/#person";
+
 const softwareApplicationSchema = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "MobileApplication",
+  "@id": SITE_URL + "/#app",
   name: "CertForge",
   operatingSystem: "Android 8.0+",
   applicationCategory: "EducationalApplication",
@@ -87,6 +91,7 @@ const softwareApplicationSchema = {
   description:
     "Adaptive AWS Cloud Practitioner (CLF-C02) exam preparation app with 800+ practice questions, weakness detection, real exam simulator, and a live readiness score. Free to install — 100 starter questions plus 20 fresh questions daily. Full unlock $4.99/month or $14.99 lifetime.",
   url: SITE_URL + "/",
+  sameAs: [PLAY_STORE_URL],
   offers: [
     {
       "@type": "Offer",
@@ -114,8 +119,15 @@ const softwareApplicationSchema = {
    */
   publisher: {
     "@type": "Organization",
-    name: "Optivio Media",
-    url: "https://optiviomedia.online",
+    "@id": ORGANIZATION_ID,
+    name: "Optivio Automation",
+    url: "https://optivioautomation.com",
+  },
+  author: {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: "Taha Ilyas",
+    url: "https://tahailyas.com",
   },
 };
 
@@ -135,10 +147,21 @@ const faqPageSchema = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Optivio Media",
-  url: "https://optiviomedia.online",
-  logo: SITE_URL + "/logo.png",
-  sameAs: ["https://linkedin.com/in/tahailyas", "https://tahailyas.com"],
+  "@id": ORGANIZATION_ID,
+  name: "Optivio Automation",
+  url: "https://optivioautomation.com",
+  logo: "https://optivioautomation.com/logo.png",
+  sameAs: ["https://play.google.com/store/apps/developer?id=Optivio+Automation"],
+  founder: {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: "Taha Ilyas",
+    url: "https://tahailyas.com",
+    sameAs: [
+      "https://github.com/realtahailyas",
+      "https://www.linkedin.com/in/tahailyas",
+    ],
+  },
 };
 
 export default function RootLayout({

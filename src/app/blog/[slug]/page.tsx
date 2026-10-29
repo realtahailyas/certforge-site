@@ -90,8 +90,9 @@ export default async function BlogPostPage({
     },
     publisher: {
       "@type": "Organization",
-      name: "Optivio Media",
-      url: "https://optiviomedia.online",
+      "@id": "https://optivioautomation.com/#organization",
+      name: "Optivio Automation",
+      url: "https://optivioautomation.com",
     },
   };
 
